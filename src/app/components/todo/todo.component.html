@@ -1,0 +1,62 @@
+<app-header
+  (openNewTodoModal)="creatingNewTodo = true"
+  (sendFilters)="filters = $event"
+/>
+
+<main class="flex flex-col h-[calc(100%-4rem)] gap-4 md:flex-row">
+  <section class="w-full h-full overflow-y-auto md:w-1/4">
+    <p class="font-bold bg-white md:sticky md:top-0 dark:bg-zinc-800">
+      Overdue
+    </p>
+    <app-list-todo
+      [todos]="todosByDate['late']"
+      [filters]="filters"
+      (sendToggleIsDone)="toggleIsDone($event)"
+      (sendSelectedTodo)="selectTodo($event)"
+    ></app-list-todo>
+  </section>
+  <section class="w-full md:overflow-y-auto md:w-1/4">
+    <p class="font-bold bg-white md:sticky md:top-0 dark:bg-zinc-800">Today</p>
+    <app-list-todo
+      [filters]="filters"
+      [todos]="todosByDate['today']"
+      (sendSelectedTodo)="selectTodo($event)"
+      (sendToggleIsDone)="toggleIsDone($event)"
+    ></app-list-todo>
+  </section>
+  <section class="w-full md:overflow-y-auto md:w-1/4">
+    <p class="font-bold bg-white md:sticky md:top-0 dark:bg-zinc-800">
+      Tomorrow
+    </p>
+    <app-list-todo
+      [filters]="filters"
+      [todos]="todosByDate['tomorrow']"
+      (sendSelectedTodo)="selectTodo($event)"
+      (sendToggleIsDone)="toggleIsDone($event)"
+    ></app-list-todo>
+  </section>
+  <section class="w-full md:overflow-y-auto md:w-1/4">
+    <p class="font-bold bg-white md:sticky md:top-0 dark:bg-zinc-800">Soon</p>
+    <app-list-todo
+      [filters]="filters"
+      [todos]="todosByDate['soon']"
+      (sendSelectedTodo)="selectTodo($event)"
+      (sendToggleIsDone)="toggleIsDone($event)"
+    ></app-list-todo>
+  </section>
+</main>
+
+@if (creatingNewTodo) {
+<app-create-todo-modal
+  [creatingNewTodo]="creatingNewTodo"
+  (sendcloseModal)="creatingNewTodo = false"
+  (sendCreateTodo)="createTodo($event)"
+></app-create-todo-modal>
+} @if (selectedTodo) {
+<app-update-todo-modal
+  [selectedTodo]="selectedTodo"
+  (sendcloseModal)="selectedTodo = null"
+  (sendDeleteTodo)="deleteTodo($event)"
+  (sendTodoUpdate)="updateTodo($event)"
+></app-update-todo-modal
+>}

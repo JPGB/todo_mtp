@@ -1,0 +1,64 @@
+<header
+  class="sticky top-0 flex flex-col justify-between w-full py-2 bg-white dark:bg-zinc-800"
+>
+  <main class="flex items-center justify-between">
+    <p class="py-4 overflow-hidden text-2xl font-bold">To do List</p>
+
+    <button
+      (click)="newTodoModal()"
+      class="self-center p-2 py-1 overflow-hidden text-sm text-white bg-blue-500 rounded-lg w-7 h-7"
+    >
+      +
+    </button>
+  </main>
+  <section class="flex flex-col gap-2">
+    <section class="flex items-center justify-start gap-4">
+      Priority:
+      <button
+        (click)="toggleFilterLow()"
+        class="self-center px-1 py-1 text-xs text-white border border-solid border-green-500 rounded-lg {{
+          filters['low'] ? 'bg-green-500 rounded-lg dark:bg-green-600' : ''
+        }}"
+      >
+        Low
+      </button>
+      <button
+        (click)="toggleFilterModerate()"
+        class="self-center px-1 py-1 text-xs text-white rounded-lg border border-solid border-amber-500 {{
+          filters['moderate'] ? 'bg-amber-500 dark:bg-amber-600' : ''
+        }}"
+      >
+        Moderate
+      </button>
+      <button
+        (click)="toggleFilterHigh()"
+        class="self-center px-1 py-1 text-xs text-white rounded-lg border border-solid border-red-500 {{
+          filters['high'] ? 'bg-red-500 rounded-lg dark:bg-red-600' : ''
+        }}"
+      >
+        High
+      </button>
+    </section>
+    <section class="flex items-center justify-start gap-4">
+      Status:
+      <button
+        (click)="toggleFilterPending()"
+        class="self-center px-1 py-1 text-xs text-white rounded-lg border border-solid border-amber-500 {{
+          filters['pending'] ? 'bg-amber-500 dark:bg-amber-600' : ''
+        }}"
+      >
+        Pending
+      </button>
+      <button
+        (click)="toggleFilterCompleted()"
+        class="self-center px-1 py-1 text-xs text-white rounded-lg border border-solid border-green-500 {{
+          filters['completed']
+            ? 'bg-green-500 rounded-lg dark:bg-green-600'
+            : ''
+        }}"
+      >
+        Completed
+      </button>
+    </section>
+  </section>
+</header>
